@@ -1,7 +1,12 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 
 function App() {
+  const [activeImageIndex, setActiveImageIndex] = useState(null)
+  const [activeFilter, setActiveFilter] = useState('All')
+  const [isAutoPlay, setIsAutoPlay] = useState(false)
+  const [carouselIndex, setCarouselIndex] = useState(0)
+
   useEffect(() => {
     const revealEls = document.querySelectorAll('.reveal')
     const observer = new IntersectionObserver(
@@ -32,7 +37,7 @@ function App() {
     {
       id: '01',
       name: 'Ceramic Coating',
-      description: 'Long-lasting paint protection',
+      description: '3-year true ceramic protection for the full exterior',
       price: '$499',
       image:
         'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/e0f06e054_generated_8a0a71f4.png',
@@ -40,7 +45,7 @@ function App() {
     {
       id: '02',
       name: 'Paint Correction',
-      description: 'Remove swirls, scratches & dullness',
+      description: 'Cut through swirls, scratches, and oxidation',
       price: '$299',
       image:
         'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/905fd7ad1_generated_29aa91a4.png',
@@ -48,39 +53,218 @@ function App() {
     {
       id: '03',
       name: 'Full Detail',
-      description: 'Inside and out, top to bottom',
+      description: 'Complete interior and exterior reset',
       price: '$149',
       image:
         'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/7d5cd352f_generated_8ef9fd9f.png',
     },
   ]
 
-  const gallery = [
-    {
-      image:
-        'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/aacdcd2c0_generated_ce299443.png',
-      tag: 'Before & After',
-      label: 'Paint Correction',
-    },
-    {
-      image:
-        'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/90036106d_generated_ce8af5a1.png',
-      tag: 'Facility',
-      label: 'The Shop',
-    },
-    {
-      image:
-        'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/9cafc0d2b_generated_6adb096e.png',
-      tag: 'Protection',
-      label: 'Ceramic Coating',
-    },
-    {
-      image:
-        'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/cb73649f3_generated_123f930a.png',
-      tag: 'Correction',
-      label: 'Paint Correction',
-    },
-  ]
+  const gallery = useMemo(
+    () => [
+      {
+        image: '/images/gallery/IMG_5544.jpg',
+        tag: 'Before & After',
+        label: 'Paint Correction',
+        size: 'large',
+      },
+      {
+        image: '/images/gallery/photo-output.jpg',
+        tag: 'Facility',
+        label: 'The Shop',
+        size: 'wide',
+      },
+      {
+        image: '/images/gallery/photo-output(1).jpg',
+        tag: 'Protection',
+        label: 'Ceramic Coating',
+        size: 'tall',
+      },
+      {
+        image: '/images/gallery/photo-output(2).jpg',
+        tag: 'Correction',
+        label: 'Paint Correction',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(3).jpg',
+        tag: 'Interior',
+        label: 'Deep Interior Detail',
+        size: 'wide',
+      },
+      {
+        image: '/images/gallery/photo-output(4).jpg',
+        tag: 'Exterior',
+        label: 'Foam + Hand Wash',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(5).jpg',
+        tag: 'Before & After',
+        label: 'Swirl Removal',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(6).jpg',
+        tag: 'Protection',
+        label: 'Coating Finish',
+        size: 'tall',
+      },
+      {
+        image: '/images/gallery/photo-output(7).jpg',
+        tag: 'Exterior',
+        label: 'Gloss Restore',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(8).jpg',
+        tag: 'Interior',
+        label: 'Interior Reset',
+        size: 'wide',
+      },
+      {
+        image: '/images/gallery/photo-output(9).jpg',
+        tag: 'Correction',
+        label: 'Cut + Polish',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(10).jpg',
+        tag: 'Before & After',
+        label: 'Paint Revival',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(11).jpg',
+        tag: 'Exterior',
+        label: 'Showroom Wash',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(12).jpg',
+        tag: 'Protection',
+        label: 'Hydrophobic Beading',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(13).jpg',
+        tag: 'Interior',
+        label: 'Detail Finish',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(14).jpg',
+        tag: 'Facility',
+        label: 'Service Bay',
+        size: 'normal',
+      },
+      {
+        image: '/images/gallery/photo-output(15).jpg',
+        tag: 'Exterior',
+        label: 'Final Walkaround',
+        size: 'normal',
+      },
+    ],
+    []
+  )
+
+  const galleryWithIndex = useMemo(
+    () => gallery.map((item, index) => ({ ...item, originalIndex: index })),
+    [gallery]
+  )
+
+  const filters = useMemo(
+    () => ['All', ...new Set(gallery.map((item) => item.tag))],
+    [gallery]
+  )
+
+  const filteredGallery = useMemo(
+    () =>
+      activeFilter === 'All'
+        ? galleryWithIndex
+        : galleryWithIndex.filter((item) => item.tag === activeFilter),
+    [activeFilter, galleryWithIndex]
+  )
+
+  const visibleIndexes = useMemo(
+    () => filteredGallery.map((item) => item.originalIndex),
+    [filteredGallery]
+  )
+
+  const activeCarouselItem =
+    filteredGallery.length > 0 ? filteredGallery[carouselIndex] : null
+
+  const activeItem =
+    activeImageIndex !== null ? gallery[activeImageIndex] : null
+
+  const goToNextCarousel = useCallback(() => {
+    if (filteredGallery.length === 0) {
+      return
+    }
+    setCarouselIndex((prev) => (prev + 1) % filteredGallery.length)
+  }, [filteredGallery.length])
+
+  const goToPreviousCarousel = useCallback(() => {
+    if (filteredGallery.length === 0) {
+      return
+    }
+    setCarouselIndex((prev) => (prev - 1 + filteredGallery.length) % filteredGallery.length)
+  }, [filteredGallery.length])
+
+  const goToNextImage = useCallback(() => {
+    if (activeImageIndex === null || visibleIndexes.length === 0) {
+      return
+    }
+
+    const currentPosition = visibleIndexes.indexOf(activeImageIndex)
+    const nextPosition = (currentPosition + 1) % visibleIndexes.length
+    setActiveImageIndex(visibleIndexes[nextPosition])
+  }, [activeImageIndex, visibleIndexes])
+
+  const goToPreviousImage = useCallback(() => {
+    if (activeImageIndex === null || visibleIndexes.length === 0) {
+      return
+    }
+
+    const currentPosition = visibleIndexes.indexOf(activeImageIndex)
+    const prevPosition = (currentPosition - 1 + visibleIndexes.length) % visibleIndexes.length
+    setActiveImageIndex(visibleIndexes[prevPosition])
+  }, [activeImageIndex, visibleIndexes])
+
+  useEffect(() => {
+    if (activeImageIndex === null) {
+      return undefined
+    }
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setActiveImageIndex(null)
+        setIsAutoPlay(false)
+      }
+      if (event.key === 'ArrowRight') {
+        goToNextImage()
+      }
+      if (event.key === 'ArrowLeft') {
+        goToPreviousImage()
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [activeImageIndex, goToNextImage, goToPreviousImage])
+
+  useEffect(() => {
+    if (activeImageIndex === null || !isAutoPlay || visibleIndexes.length < 2) {
+      return undefined
+    }
+
+    const timer = window.setInterval(() => {
+      goToNextImage()
+    }, 2800)
+
+    return () => window.clearInterval(timer)
+  }, [activeImageIndex, goToNextImage, isAutoPlay, visibleIndexes])
 
   const highlights = [
     {
@@ -136,9 +320,9 @@ function App() {
             Your car, <span>looking its best.</span>
           </h1>
           <p className="hero-copy hero-animate delay-3">
-            Clean Stream Detailing is a Michigan-based auto detailing shop specializing in ceramic
-            coatings, paint correction, and full-service detailing. We treat every car like it&apos;s
-            our own.
+            Clean Stream Detailing is a Michigan-based mobile full-service detailing company
+            specializing in ceramic coatings, paint correction, and deep interior and exterior
+            details. Every vehicle is treated with precision and pride.
           </p>
           <div className="hero-actions hero-animate delay-4">
             <a className="button button-primary" href="#booking">
@@ -170,8 +354,8 @@ function App() {
         <p className="section-label reveal-item">What I Offer</p>
         <h2 className="reveal-item">Services</h2>
         <p className="section-copy reveal-item">
-          Every job is done by hand with professional products. Click a service to see what&apos;s
-          included.
+          Every package is done by hand using pro-grade products and proven process steps for
+          consistent, high-quality results.
         </p>
         <div className="service-grid">
           {services.map((service, index) => (
@@ -196,21 +380,72 @@ function App() {
         <p className="section-copy reveal-item">
           Every photo is a real job from a real customer&apos;s car. No stock photos, no filters.
         </p>
-        <div className="work-grid">
-          {gallery.map((item, index) => (
-            <article
-              key={`${item.tag}-${item.label}`}
-              className="work-item reveal-item"
-              style={{ '--delay': `${index * 90}ms` }}
+        <div className="gallery-filters reveal-item">
+          {filters.map((filter) => (
+            <button
+              key={filter}
+              type="button"
+              className={`filter-chip ${activeFilter === filter ? 'active' : ''}`}
+              onClick={() => {
+                setActiveFilter(filter)
+                setCarouselIndex(0)
+              }}
             >
-              <img src={item.image} alt={item.label} />
-              <div className="work-caption">
-                <span>{item.tag}</span>
-                <h3>{item.label}</h3>
-              </div>
-            </article>
+              {filter}
+            </button>
           ))}
         </div>
+        {activeCarouselItem && (
+          <div className="carousel reveal-item">
+            <div className="carousel-main">
+              <button
+                type="button"
+                className="carousel-image-button"
+                onClick={() => setActiveImageIndex(activeCarouselItem.originalIndex)}
+                aria-label={`Open image: ${activeCarouselItem.label}`}
+              >
+                <img src={activeCarouselItem.image} alt={activeCarouselItem.label} loading="lazy" />
+              </button>
+              <div className="work-caption">
+                <span>{activeCarouselItem.tag}</span>
+                <h3>{activeCarouselItem.label}</h3>
+              </div>
+              <button
+                type="button"
+                className="carousel-nav carousel-prev"
+                onClick={goToPreviousCarousel}
+                aria-label="Previous gallery image"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                className="carousel-nav carousel-next"
+                onClick={goToNextCarousel}
+                aria-label="Next gallery image"
+              >
+                ›
+              </button>
+              <p className="carousel-count">
+                {carouselIndex + 1} / {filteredGallery.length}
+              </p>
+            </div>
+
+            <div className="carousel-thumbs">
+              {filteredGallery.map((item, index) => (
+                <button
+                  key={`${item.tag}-${item.label}`}
+                  type="button"
+                  className={`thumb ${carouselIndex === index ? 'active' : ''}`}
+                  onClick={() => setCarouselIndex(index)}
+                  aria-label={`View ${item.label}`}
+                >
+                  <img src={item.image} alt={item.label} loading="lazy" />
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         </div>
       </section>
 
@@ -220,13 +455,14 @@ function App() {
         <p className="section-label">About Me</p>
         <h2>I&apos;m a car guy who takes pride in his work.</h2>
         <p className="section-copy">
-          Clean Stream Detailing started because I genuinely love cars and couldn&apos;t find a local
-          detailer who cared as much as I did. So I started doing it myself and people noticed.
+          Clean Stream Detailing started from a simple mission: provide honest, high-effort
+          detailing with real results and no shortcuts. What began as personal passion became a
+          trusted local service.
         </p>
         <p className="section-copy">
-          Whether it&apos;s a daily driver or a weekend show car, I give every vehicle the same level
-          of care. No crews, no assembly lines, just me, the right tools, and a commitment to
-          doing it right.
+          From daily drivers to show builds, every job gets the same attention to prep, correction,
+          and protection. Clean Stream also offers exterior home services like pressure washing,
+          gutter cleaning, and window cleaning.
         </p>
         <div className="hero-actions about-actions">
           <a className="button button-primary" href="#contact">
@@ -272,7 +508,7 @@ function App() {
           <li>Free Estimates</li>
           <li>Mobile Service Available</li>
           <li>Michigan-Based</li>
-          <li>5-Star Rated</li>
+          <li>Auto + Home Exterior Services</li>
         </ul>
         </div>
       </section>
@@ -289,6 +525,84 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {activeImageIndex !== null && (
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Gallery image viewer"
+          onClick={() => {
+            setActiveImageIndex(null)
+            setIsAutoPlay(false)
+          }}
+        >
+          <button
+            type="button"
+            className="lightbox-close"
+            onClick={() => {
+              setActiveImageIndex(null)
+              setIsAutoPlay(false)
+            }}
+            aria-label="Close image viewer"
+          >
+            ×
+          </button>
+
+          <button
+            type="button"
+            className="lightbox-play"
+            onClick={(event) => {
+              event.stopPropagation()
+              setIsAutoPlay((prev) => !prev)
+            }}
+            aria-label={isAutoPlay ? 'Pause slideshow' : 'Start slideshow'}
+          >
+            {isAutoPlay ? 'Pause' : 'Slideshow'}
+          </button>
+
+          <button
+            type="button"
+            className="lightbox-nav lightbox-prev"
+            onClick={(event) => {
+              event.stopPropagation()
+              goToPreviousImage()
+            }}
+            aria-label="Previous image"
+          >
+            ‹
+          </button>
+
+          <figure
+            className="lightbox-figure"
+            onClick={(event) => {
+              event.stopPropagation()
+            }}
+          >
+            <img
+              src={activeItem?.image}
+              alt={activeItem?.label}
+              className={`lightbox-image ${isAutoPlay ? 'kenburns' : ''}`}
+            />
+            <figcaption>
+              <span>{activeItem?.tag}</span>
+              <strong>{activeItem?.label}</strong>
+            </figcaption>
+          </figure>
+
+          <button
+            type="button"
+            className="lightbox-nav lightbox-next"
+            onClick={(event) => {
+              event.stopPropagation()
+              goToNextImage()
+            }}
+            aria-label="Next image"
+          >
+            ›
+          </button>
+        </div>
+      )}
     </main>
   )
 }
