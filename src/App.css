@@ -12,6 +12,7 @@
   background: rgba(26, 26, 26, 0.65);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
+  padding-top: env(safe-area-inset-top);
 }
 
 .topbar-inner {
@@ -28,11 +29,33 @@
   color: #fff;
 }
 
-.brand-bar {
-  width: 0.35rem;
-  height: 1.65rem;
-  border-radius: 999px;
-  background: var(--gold);
+.brand-logo {
+  width: 2.35rem;
+  height: 2.35rem;
+  object-fit: contain;
+  border-radius: 0.4rem;
+  background: rgba(16, 16, 16, 0.72);
+  border: 1px solid rgba(243, 219, 178, 0.55);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.34);
+  padding: 0.18rem;
+  opacity: 1;
+  filter: saturate(1.02) contrast(1.15) brightness(1.05);
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 180ms ease,
+    filter 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.brand:hover .brand-logo {
+  opacity: 1;
+  background: rgba(16, 16, 16, 0.9);
+  border-color: rgba(243, 219, 178, 0.82);
+  filter: saturate(1.08) contrast(1.2) brightness(1.1);
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
 .brand strong {
@@ -66,6 +89,8 @@
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+  padding-top: calc(4.3rem + env(safe-area-inset-top));
+  box-sizing: border-box;
 }
 
 .hero-bg,
@@ -219,6 +244,7 @@ h1 span {
 
 .section {
   padding: 5rem 0;
+  scroll-margin-top: 5.5rem;
 }
 
 .section-cream {
@@ -289,12 +315,14 @@ h2 {
 
 .service-card {
   display: grid;
-  grid-template-columns: 14rem 1fr;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
   border: 1px solid rgba(200, 169, 110, 0.3);
   border-radius: 0.5rem;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.85);
   transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  padding: 1.1rem 1.4rem;
 }
 
 .service-card:hover {
@@ -303,36 +331,48 @@ h2 {
   box-shadow: 0 12px 22px rgba(0, 0, 0, 0.12);
 }
 
-.service-card img {
-  width: 100%;
-  height: 100%;
-  min-height: 11rem;
-  object-fit: cover;
+.service-number {
+  color: var(--gold-dark);
+  font-size: 0.95rem;
+  font-weight: 700;
+  min-width: 1.8rem;
 }
 
 .service-body {
-  padding: 1.2rem 1.4rem;
+  min-width: 0;
 }
 
 .service-id {
-  color: var(--gold-dark);
-  font-size: 0.76rem;
-  font-weight: 700;
+  display: none;
 }
 
 .service-card h3 {
-  font-size: 1.3rem;
-  margin-top: 0.3rem;
+  font-size: 2rem;
+  margin: 0;
+  line-height: 1.1;
 }
 
 .service-card p {
+  margin-top: 0.35rem;
   color: var(--warm-gray);
 }
 
+.service-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-self: end;
+}
+
 .service-card strong {
-  display: inline-block;
-  margin-top: 0.6rem;
   color: var(--gold-dark);
+  font-size: 1.05rem;
+}
+
+.service-arrow {
+  color: #7d786d;
+  font-size: 2rem;
+  line-height: 1;
 }
 
 .carousel {
@@ -517,6 +557,10 @@ h2 {
   border-color: rgba(255, 255, 255, 0.25);
 }
 
+.cta .hero-actions {
+  justify-content: center;
+}
+
 .cta-inner .button-secondary:hover {
   border-color: rgba(200, 169, 110, 0.55);
   color: var(--gold-light);
@@ -541,6 +585,7 @@ h2 {
   background: var(--charcoal);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 3rem 0;
+  scroll-margin-top: 5.5rem;
 }
 
 .footer-inner {
@@ -714,16 +759,64 @@ h2 {
     display: none;
   }
 
+  .topbar-inner {
+    min-height: 3.8rem;
+  }
+
+  .section,
+  .footer {
+    scroll-margin-top: 4.8rem;
+  }
+
   .container {
     width: min(72rem, 100% - 2rem);
   }
 
+  .hero {
+    min-height: 86svh;
+    padding-top: calc(3.8rem + env(safe-area-inset-top));
+  }
+
   .hero-content {
-    padding-bottom: 3rem;
+    padding-bottom: 2.4rem;
+  }
+
+  .trust-pill {
+    margin-top: 0.4rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+
+  .hero-copy {
+    margin-top: 0.95rem;
+    font-size: 0.95rem;
+  }
+
+  .section {
+    padding: 4rem 0;
   }
 
   .service-card {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr auto;
+    padding: 0.95rem 1rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .service-card p {
+    font-size: 0.92rem;
+  }
+
+  .service-meta {
+    gap: 0.45rem;
+  }
+
+  .service-arrow {
+    font-size: 1.5rem;
   }
 
   .about-grid,
@@ -746,5 +839,21 @@ h2 {
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .carousel-main {
+    min-height: 16rem;
+  }
+
+  .carousel-thumbs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .carousel-nav {
+    width: 2.1rem;
+    height: 2.1rem;
   }
 }

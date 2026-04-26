@@ -37,26 +37,20 @@ function App() {
     {
       id: '01',
       name: 'Ceramic Coating',
-      description: '3-year true ceramic protection for the full exterior',
+      description: 'Long-lasting paint protection',
       price: '$499',
-      image:
-        'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/e0f06e054_generated_8a0a71f4.png',
     },
     {
       id: '02',
       name: 'Paint Correction',
-      description: 'Cut through swirls, scratches, and oxidation',
+      description: 'Remove swirls, scratches & dullness',
       price: '$299',
-      image:
-        'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/905fd7ad1_generated_29aa91a4.png',
     },
     {
       id: '03',
       name: 'Full Detail',
-      description: 'Complete interior and exterior reset',
+      description: 'Inside and out, top to bottom',
       price: '$149',
-      image:
-        'https://media.base44.com/images/public/69e0e772228ea848e6faec1c/7d5cd352f_generated_8ef9fd9f.png',
     },
   ]
 
@@ -290,7 +284,11 @@ function App() {
       <header className="topbar">
         <div className="container topbar-inner">
           <a className="brand" href="#">
-            <span className="brand-bar"></span>
+            <img
+              className="brand-logo"
+              src="/images/gallery/cleanstream_logo.webp"
+              alt="Clean Stream Detailing logo"
+            />
             <span>
               <strong>Clean Stream</strong>
               <small>Detailing</small>
@@ -359,15 +357,28 @@ function App() {
         </p>
         <div className="service-grid">
           {services.map((service, index) => (
-            <article key={service.id} className="service-card reveal-item" style={{ '--delay': `${index * 90}ms` }}>
-              <img src={service.image} alt={service.name} />
+            <a
+              key={service.id}
+              className="service-card reveal-item"
+              style={{ '--delay': `${index * 90}ms` }}
+              href="https://www.cleanstreamdetailing.com/s/appointments"
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Book online for ${service.name}`}
+            >
+              <div className="service-number">{service.id}</div>
               <div className="service-body">
                 <p className="service-id">{service.id}</p>
                 <h3>{service.name}</h3>
                 <p>{service.description}</p>
-                <strong>{service.price}</strong>
               </div>
-            </article>
+              <div className="service-meta">
+                <strong>{service.price}</strong>
+                <span className="service-arrow" aria-hidden="true">
+                  ›
+                </span>
+              </div>
+            </a>
           ))}
         </div>
         </div>
