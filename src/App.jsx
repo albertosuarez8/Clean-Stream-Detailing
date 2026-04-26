@@ -2,6 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 
 function App() {
+  const asset = (path) => `${import.meta.env.BASE_URL}${path}`
+
   const [activeImageIndex, setActiveImageIndex] = useState(null)
   const [activeFilter, setActiveFilter] = useState('All')
   const [isAutoPlay, setIsAutoPlay] = useState(false)
@@ -57,103 +59,103 @@ function App() {
   const gallery = useMemo(
     () => [
       {
-        image: '/images/gallery/IMG_5544.jpg',
+        image: asset('images/gallery/IMG_5544.jpg'),
         tag: 'Before & After',
         label: 'Paint Correction',
         size: 'large',
       },
       {
-        image: '/images/gallery/photo-output.jpg',
+        image: asset('images/gallery/photo-output.jpg'),
         tag: 'Facility',
         label: 'The Shop',
         size: 'wide',
       },
       {
-        image: '/images/gallery/photo-output(1).jpg',
+        image: asset('images/gallery/photo-output(1).jpg'),
         tag: 'Protection',
         label: 'Ceramic Coating',
         size: 'tall',
       },
       {
-        image: '/images/gallery/photo-output(2).jpg',
+        image: asset('images/gallery/photo-output(2).jpg'),
         tag: 'Correction',
         label: 'Paint Correction',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(3).jpg',
+        image: asset('images/gallery/photo-output(3).jpg'),
         tag: 'Interior',
         label: 'Deep Interior Detail',
         size: 'wide',
       },
       {
-        image: '/images/gallery/photo-output(4).jpg',
+        image: asset('images/gallery/photo-output(4).jpg'),
         tag: 'Exterior',
         label: 'Foam + Hand Wash',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(5).jpg',
+        image: asset('images/gallery/photo-output(5).jpg'),
         tag: 'Before & After',
         label: 'Swirl Removal',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(6).jpg',
+        image: asset('images/gallery/photo-output(6).jpg'),
         tag: 'Protection',
         label: 'Coating Finish',
         size: 'tall',
       },
       {
-        image: '/images/gallery/photo-output(7).jpg',
+        image: asset('images/gallery/photo-output(7).jpg'),
         tag: 'Exterior',
         label: 'Gloss Restore',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(8).jpg',
+        image: asset('images/gallery/photo-output(8).jpg'),
         tag: 'Interior',
         label: 'Interior Reset',
         size: 'wide',
       },
       {
-        image: '/images/gallery/photo-output(9).jpg',
+        image: asset('images/gallery/photo-output(9).jpg'),
         tag: 'Correction',
         label: 'Cut + Polish',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(10).jpg',
+        image: asset('images/gallery/photo-output(10).jpg'),
         tag: 'Before & After',
         label: 'Paint Revival',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(11).jpg',
+        image: asset('images/gallery/photo-output(11).jpg'),
         tag: 'Exterior',
         label: 'Showroom Wash',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(12).jpg',
+        image: asset('images/gallery/photo-output(12).jpg'),
         tag: 'Protection',
         label: 'Hydrophobic Beading',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(13).jpg',
+        image: asset('images/gallery/photo-output(13).jpg'),
         tag: 'Interior',
         label: 'Detail Finish',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(14).jpg',
+        image: asset('images/gallery/photo-output(14).jpg'),
         tag: 'Facility',
         label: 'Service Bay',
         size: 'normal',
       },
       {
-        image: '/images/gallery/photo-output(15).jpg',
+        image: asset('images/gallery/photo-output(15).jpg'),
         tag: 'Exterior',
         label: 'Final Walkaround',
         size: 'normal',
@@ -286,7 +288,7 @@ function App() {
           <a className="brand" href="#">
             <img
               className="brand-logo"
-              src="/images/gallery/cleanstream_logo.webp"
+              src={asset('images/gallery/cleanstream_logo.webp')}
               alt="Clean Stream Detailing logo"
             />
             <span>
