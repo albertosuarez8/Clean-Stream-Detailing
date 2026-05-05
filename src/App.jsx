@@ -38,21 +38,21 @@ function App() {
   const services = [
     {
       id: '01',
-      name: 'Ceramic Coating',
+      name: 'Home Detailing',
       description: 'Long-lasting paint protection',
-      price: '$499',
+      price: 'From $199',
     },
     {
       id: '02',
-      name: 'Paint Correction',
+      name: 'Car Detailing',
       description: 'Remove swirls, scratches & dullness',
-      price: '$299',
+      price: 'From $199',
     },
     {
       id: '03',
-      name: 'Full Detail',
+      name: 'Window Washing',
       description: 'Inside and out, top to bottom',
-      price: '$149',
+      price: 'From $150',
     },
   ]
 
@@ -60,104 +60,98 @@ function App() {
     () => [
       {
         image: asset('images/gallery/IMG_5544.jpg'),
-        tag: 'Before & After',
-        label: 'Paint Correction',
+        tag: 'Car Detailing Exterior',
+        label: 'Car Detailing Exterior',
         size: 'large',
       },
       {
         image: asset('images/gallery/photo-output.jpg'),
-        tag: 'Facility',
-        label: 'The Shop',
+        tag: 'Home Pressure Washing',
+        label: 'Home Pressure Washing',
         size: 'wide',
       },
       {
         image: asset('images/gallery/photo-output(1).jpg'),
-        tag: 'Protection',
-        label: 'Ceramic Coating',
+        tag: 'Driveway Pressure Washing',
+        label: 'Driveway Pressure Washing',
         size: 'tall',
       },
       {
         image: asset('images/gallery/photo-output(2).jpg'),
-        tag: 'Correction',
-        label: 'Paint Correction',
+        tag: 'Car Detailing Exterior',
+        label: 'Car Detailing Exterior',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(3).jpg'),
-        tag: 'Interior',
-        label: 'Deep Interior Detail',
+        tag: 'Driveway Pressure Washing',
+        label: 'Driveway Pressure Washing',
         size: 'wide',
       },
       {
         image: asset('images/gallery/photo-output(4).jpg'),
-        tag: 'Exterior',
-        label: 'Foam + Hand Wash',
+        tag: 'Car Detailing Exterior',
+        label: 'Car Detailing Exterior',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(5).jpg'),
-        tag: 'Before & After',
-        label: 'Swirl Removal',
+        tag: 'Home Pressure Washing',
+        label: 'Home Pressure Washing',
         size: 'normal',
       },
       {
-        image: asset('images/gallery/photo-output(6).jpg'),
-        tag: 'Protection',
-        label: 'Coating Finish',
-        size: 'tall',
-      },
-      {
         image: asset('images/gallery/photo-output(7).jpg'),
-        tag: 'Exterior',
-        label: 'Gloss Restore',
+        tag: 'Car Detailing Exterior',
+        label: 'Car Detailing Exterior',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(8).jpg'),
-        tag: 'Interior',
-        label: 'Interior Reset',
+        tag: 'Home Pressure Washing',
+        label: 'Home Pressure Washing',
         size: 'wide',
       },
       {
         image: asset('images/gallery/photo-output(9).jpg'),
-        tag: 'Correction',
-        label: 'Cut + Polish',
+        tag: 'Driveway Pressure Washing',
+        label: 'Driveway Pressure Washing',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(10).jpg'),
-        tag: 'Before & After',
-        label: 'Paint Revival',
+        tag: 'Driveway Pressure Washing',
+        label: 'Driveway Pressure Washing',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(11).jpg'),
-        tag: 'Exterior',
-        label: 'Showroom Wash',
+        tag: 'Window Cleaning',
+        label: 'Window Cleaning',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(12).jpg'),
-        tag: 'Protection',
-        label: 'Hydrophobic Beading',
+        tag: 'Car Detailing Exterior',
+        label: 'Car Detailing Exterior',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(13).jpg'),
-        tag: 'Interior',
-        label: 'Detail Finish',
+        tag: 'Car Detailing Exterior',
+        label: 'Car Detailing Exterior',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(14).jpg'),
-        tag: 'Facility',
-        label: 'Service Bay',
+        tag: 'Driveway Pressure Washing',
+        label: 'Driveway Pressure Washing',
         size: 'normal',
       },
       {
         image: asset('images/gallery/photo-output(15).jpg'),
-        tag: 'Exterior',
-        label: 'Final Walkaround',
+        tag: 'Driveway Pressure Washing',
+        label: 'Driveway Pressure Washing',
         size: 'normal',
       },
     ],
@@ -273,7 +267,7 @@ function App() {
     },
     {
       title: 'Local & Proud',
-      text: "Based right here in Michigan. I'm your neighbor, not a franchise. You'll always deal with me directly.",
+      text: "Based right here in Charlotte. I'm your neighbor, not a franchise. You'll always deal with me directly.",
     },
     {
       title: 'Satisfaction Guaranteed',
@@ -285,17 +279,6 @@ function App() {
     <main>
       <header className="topbar">
         <div className="container topbar-inner">
-          <a className="brand" href="#">
-            <img
-              className="brand-logo"
-              src={asset('images/gallery/cleanstream_logo.webp')}
-              alt="Clean Stream Detailing logo"
-            />
-            <span>
-              <strong>Clean Stream</strong>
-              <small>Detailing</small>
-            </span>
-          </a>
           <nav className="nav-links">
             {navItems.map((item) => (
               <a key={item.label} href={item.href}>
@@ -317,12 +300,13 @@ function App() {
         <div className="container hero-content">
           <p className="trust-pill hero-animate delay-1">Trusted by 500+ local customers</p>
           <h1 className="hero-animate delay-2">
-            Your car, <span>looking its best.</span>
+            Your home, car, or driveway, <span>looking their best.</span>
           </h1>
           <p className="hero-copy hero-animate delay-3">
-            Clean Stream Detailing is a Michigan-based mobile full-service detailing company
-            specializing in ceramic coatings, paint correction, and deep interior and exterior
-            details. Every vehicle is treated with precision and pride.
+            Clean stream detailing is a Charlotte-based mobile full-service detailing company
+            specializing in Home Pressure Wash Cleaning, Car Detailing, Window Cleaning, Gutter
+            Cleaning and Driveway Pressure washing. Every job is performed with precision and
+            provides a satisfaction guarantee.
           </p>
           <div className="hero-actions hero-animate delay-4">
             <a className="button button-primary" href="#booking">
@@ -351,7 +335,7 @@ function App() {
 
       <section id="services" className="section section-cream reveal">
         <div className="container">
-        <p className="section-label reveal-item">What I Offer</p>
+        <p className="section-label reveal-item">What We Offer</p>
         <h2 className="reveal-item">Services</h2>
         <p className="section-copy reveal-item">
           Every package is done by hand using pro-grade products and proven process steps for
@@ -447,7 +431,7 @@ function App() {
             <div className="carousel-thumbs">
               {filteredGallery.map((item, index) => (
                 <button
-                  key={`${item.tag}-${item.label}`}
+                  key={`${item.tag}-${item.label}-${index}`}
                   type="button"
                   className={`thumb ${carouselIndex === index ? 'active' : ''}`}
                   onClick={() => setCarouselIndex(index)}
@@ -465,17 +449,15 @@ function App() {
       <section id="about" className="section section-cream about reveal">
         <div className="container about-grid">
           <div className="reveal-item">
-        <p className="section-label">About Me</p>
-        <h2>I&apos;m a car guy who takes pride in his work.</h2>
+        <p className="section-label">About Us</p>
+        <h2>We take pride in our work.</h2>
         <p className="section-copy">
           Clean Stream Detailing started from a simple mission: provide honest, high-effort
-          detailing with real results and no shortcuts. What began as personal passion became a
-          trusted local service.
+          detailing with real results and no shortcuts. What began as a personal passion become a
+          trusted local service by more than 200 clients.
         </p>
         <p className="section-copy">
-          From daily drivers to show builds, every job gets the same attention to prep, correction,
-          and protection. Clean Stream also offers exterior home services like pressure washing,
-          gutter cleaning, and window cleaning.
+          Every job gets the same attention to prep, correction, and protection.
         </p>
         <div className="hero-actions about-actions">
           <a className="button button-primary" href="#contact">
@@ -520,7 +502,7 @@ function App() {
         <ul className="badges reveal-item" aria-label="Business highlights">
           <li>Free Estimates</li>
           <li>Mobile Service Available</li>
-          <li>Michigan-Based</li>
+          <li>Charlotte-Based</li>
           <li>Auto + Home Exterior Services</li>
         </ul>
         </div>
